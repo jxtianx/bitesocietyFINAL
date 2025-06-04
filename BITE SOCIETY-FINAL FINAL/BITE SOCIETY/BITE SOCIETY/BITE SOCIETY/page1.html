@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const words = ["Bite", "Society"];
+    let wordIndex = 0;
+    const changingText = document.querySelector(".changing-word");
+
+    function changeWord() {
+        changingText.innerText = words[wordIndex];
+        wordIndex = (wordIndex + 1) % words.length;
+    }
+
+    setInterval(changeWord, 700); 
+    setTimeout(() => {
+        const loadingScreen = document.querySelector(".loading-screen");
+        if (loadingScreen) {
+            loadingScreen.style.opacity = "0";
+            setTimeout(() => {
+                loadingScreen.style.display = "none";
+            }, 500);
+        }
+    }, 3000);
+
+    const buyNowBtn = document.querySelector(".buy-now-btn");
+
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            document.body.classList.add("bite-effect");
+
+            setTimeout(() => {
+                window.location.href = "products-page1.html"; 
+            }, 1200); 
+        });
+    }
+
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    function updateCartModal() {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const itemsList = document.getElementById('cart-items');
+        const emptyMsg = document.getElementById('cart-empty');
+        itemsList.innerHTML = '';
+        if (cart.length === 0) {
+            emptyMsg.style.display = 'block';
+        } else {
+            emptyMsg.style.display = 'none';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                li.style.padding = '8px 0';
+                itemsList.appendChild(li);
+            });
+        }
+    }
+
+    var cartBtn = document.getElementById('cart-btn');
+    if (cartBtn) {
+        cartBtn.onclick = function() {
+            updateCartModal();
+            document.getElementById('cart-modal').style.display = 'flex';
+        };
+    }
+    var closeCart = document.getElementById('close-cart');
+    if (closeCart) {
+        closeCart.onclick = function() {
+            document.getElementById('cart-modal').style.display = 'none';
+        };
+    }
+
+    updateCartCount();
+});
+</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bite Society</title>
+    <link rel="stylesheet" href="css/page1.css">
+</head>
+<body>
+<div class="loading-screen">
+    <div class="loading-content">
+        <img src="images/logo.png" alt="Bite Society Logo" class="loading-logo">
+        <p class="loading-text">Loading <span class="changing-word">Bite Society</span>...</p>
+    </div>
+</div>
+    <header class="header">
+        <div class="header-left">
+            <a href="page1.html">
+                <img src="images/logo.png" alt="Logo" class="logo">
+            </a>
+            <span class="logo-name">BITE SOCIETY</span>
+        </div>
+        <ul>
+            <li><a href="page1.html">HOME</a></li>
+            <li><a href="page2.html">ABOUT</a></li>
+            <li><a href="products-page1.html">PRODUCTS</a></li>
+            <li><a href="page4.html">CONTACT</a></li>
+            <li id="cart-li">
+                <button id="cart-btn" style="background:none;border:none;cursor:pointer;position:relative;">
+                    <svg id="cart-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span id="cart-count" style="position:absolute;top:-8px;right:-8px;background:#e48a8a;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%;font-weight:bold;">0</span>
+                </button>
+            </li>
+        </ul>
+    </header>
+    <div class="sprinkles-container">
+        <div class="sprinkle"></div>
+        <div class="sprinkle"></div>
+        <div class="sprinkle"></div>
+        <div class="sprinkle"></div>
+        <div class="sprinkle"></div>
+        <div class="sprinkle"></div>
+    </div>
+    <main>
+        <div class="content">
+            <h1>BITE<br> 
+                <span class="changing-text"></span>
+            </h1>
+            <a href="products-page1.html" class="buy-now-btn">Bite Now!</a>
+            <img src="images/v2020_87.png" alt="Bitten Donut" class="donut-image">
+        </div>
+    </main>
+
+    <div id="cart-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:10000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 24px 24px 24px;border-radius:16px;min-width:320px;max-width:90vw;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+            <button id="close-cart" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;cursor:pointer;color:#e48a8a;">&times;</button>
+            <h2 style="margin-bottom:16px;color:#e48a8a;">Your Cart</h2>
+            <ul id="cart-items" style="list-style:none;padding:0;margin:0 0 16px 0;"></ul>
+            <div id="cart-empty" style="color:#888;text-align:center;">Your cart is empty.</div>
+        </div>
+    </div>
+    <div id="welcome-bubble" style="position:fixed;bottom:32px;right:32px;z-index:99999;background:#fffbe6;border-radius:16px 16px 16px 0;padding:16px 22px;box-shadow:0 2px 12px rgba(0,0,0,0.10);color:#5a3e36;font-size:18px;font-family:montserrat;max-width:260px;min-width:120px;transition:opacity 0.5s;">Welcome to Bite Society! 🍩</div>
+</body>
+</html>

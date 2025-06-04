@@ -1,0 +1,472 @@
+@keyframes changeText {
+    0% { content: "SOCIETY"; }
+    33% { content: "DONUT"; }
+    66% { content: "NOW"; }
+    100% { content: "SOCIETY"; }
+}
+
+.changing-text::after {
+    content: "SOCIETY";
+    color: #5a3e36;
+    animation: changeText 5s infinite;
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* Loading Text Animation */
+@keyframes fade {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+
+
+/* Keeping existing styles */
+body {
+    margin: 0;
+    background: linear-gradient(to right, #FE9A98 50%, #FFB9B9 50%);
+    overflow: hidden;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8a8a8;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'PorterSansInlineBlock', sans-serif;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo {
+    width: 50px;
+    height: auto;
+}
+.logo-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+.header ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.header ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+@font-face {
+  font-family: PorterSansBlock;
+  src: url(porter-sans-inline-block.ttf);
+}
+
+@font-face {
+  font-family: montserrat;
+  src: url(Montserrat-Medium.ttf);
+}
+
+.logo-search {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    width: 200px;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    color: white;
+}
+
+.search-icon {
+    margin-left: 50px;
+    font-size: 16px;
+    height: auto;
+    width: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-items {
+  font-size: 16px;
+  color: white;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    color: white;
+}
+
+.content {
+    text-align: center;
+    margin-top: 10px;
+}
+
+h1 {
+    font-family: PorterSansBlock;
+    font-size: 122px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.donut-image {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(210deg);
+    width: 640px; /* Fixed width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+    }
+}
+/* Sprinkle Container */
+.sprinkles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Sprinkle Style */
+.sprinkle {
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    border-radius: 5px;
+    opacity: 0.8;
+    animation: fallingSprinkles 5s infinite linear;
+}
+
+/* Different Sprinkle Colors */
+.sprinkle:nth-child(1) { background: #ffcc00; left: 10%; animation-duration: 6s; }
+.sprinkle:nth-child(2) { background: #ff6699; left: 30%; animation-duration: 4s; }
+.sprinkle:nth-child(3) { background: #66ccff; left: 50%; animation-duration: 7s; }
+.sprinkle:nth-child(4) { background: #ff6666; left: 70%; animation-duration: 5s; }
+.sprinkle:nth-child(5) { background: #66ff66; left: 90%; animation-duration: 8s; }
+.sprinkle:nth-child(6) { background: #cc66ff; left: 20%; animation-duration: 6s; }
+
+/* Sprinkle Falling Animation */
+@keyframes fallingSprinkles {
+    from { transform: translateY(-10%); opacity: 1; }
+    to { transform: translateY(100vh); opacity: 0; }
+}
+/* Loading Screen (Full Page) */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fcd4d4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 9999;
+}
+
+/* Centered Loading Content */
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Rotating Logo */
+.loading-logo {
+    width: 120px; /* Adjust size */
+    height: auto;
+    animation: spin 2s linear infinite;
+    margin-bottom: 20px; /* Spacing from text */
+}
+
+/* Loading Text */
+.loading-text {
+    font-family: 'Montserrat', sans-serif; /* Stylish font */
+    font-size: 28px;
+    font-weight: bold;
+    color: #5a3e36;
+}
+
+/* Changing Words with Animation */
+.changing-word {
+    font-size: 30px;
+    font-weight: bold;
+    color: #dd9b7f;
+    display: inline-block;
+    animation: fade 0.7s ease-in-out infinite;
+}
+
+/* Rotation Animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Fading Effect */
+@keyframes fade {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.buy-now-btn {
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.7em 2em;
+    border: 3px solid #5a3e36;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: #5a3e36;
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 2;
+    background: white;
+    cursor: pointer;
+}
+
+/* Full-screen Munch Effect */
+/* Full-screen Munch Effect */
+.munch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fcd4d4; /* Match page background */
+    clip-path: circle(100% at 50% 50%);
+    transition: clip-path 1s ease-in-out;
+    z-index: 9999;
+}
+
+/* Shrinking effect like being "munched" */
+.munch-overlay.munched {
+    clip-path: circle(0% at 50% 50%);
+}
+/* Bite Effect */
+.bite {
+    animation: biteAnimation 0.6s forwards ease-in-out;
+}
+
+/* Bite Animation */
+@keyframes biteAnimation {
+    0% { clip-path: circle(100% at 50% 50%); }
+    30% { clip-path: circle(85% at 50% 50%); }
+    60% { clip-path: circle(75% at 50% 50%); }
+    100% { clip-path: circle(60% at 50% 50%); }
+}
+
+/* Change text after bite */
+.bite::after {
+    content: "MUNCHED!";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Ensure "MUNCHED!" is visible after animation */
+.bite::after {
+    opacity: 1;
+}
+
+/* Hover Effect */
+.buy-now-btn:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: #8F482A;
+    z-index: -1;
+}
+
+.buy-now-btn:hover, .buy-now-btn:focus {
+    color: #ffffff;
+}
+
+.buy-now-btn:hover:before, .buy-now-btn:focus:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+/* Click Effect */
+.buy-now-btn:active {
+    transform: scale(0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .buy-now-btn {
+        top: 63%;
+        font-size: 16px;
+        padding: 0.6em 1.5em;
+    }
+}
+
+/* Bite Effect on Full Page */
+.bite-effect {
+    animation: biteAnimation 1.2s forwards ease-in-out;
+}
+
+/* The bite effect - chunks disappear in a curved way */
+@keyframes biteAnimation {
+    0% { clip-path: circle(100% at 50% 50%); }
+    30% { clip-path: circle(85% at 40% 40%); }
+    60% { clip-path: circle(60% at 50% 30%); }
+    100% { clip-path: circle(0% at 50% 50%); }
+}
+
+/* Shopping Cart Styles */
+#cart-li {
+  display: flex;
+  align-items: center;
+}
+#cart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+#cart-icon {
+  transition: transform 0.2s;
+}
+#cart-btn:hover #cart-icon {
+  transform: scale(1.1) rotate(-8deg);
+  stroke: #e48a8a;
+}
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #e48a8a;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+#cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+#cart-modal > div {
+  background: #fff;
+  padding: 32px 24px 24px 24px;
+  border-radius: 16px;
+  min-width: 320px;
+  max-width: 90vw;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+#close-cart {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #e48a8a;
+  transition: color 0.2s;
+}
+#close-cart:hover {
+  color: #b23b3b;
+}
+#cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+#cart-items li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f8a8a8;
+  color: #5a3e36;
+  font-size: 16px;
+}
+#cart-empty {
+  color: #888;
+  text-align: center;
+  font-size: 16px;
+}

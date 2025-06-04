@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Bite Society</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/signup.css" />
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+</head>
+<body>
+  <div class="logo-container">
+    <img src="css/images/BS LOGO.png" alt="Bite Society Logo" class="logo-img">
+    <span class="logo-text">BITE SOCIETY</span>
+  </div>
+
+  <div class="signup-box">
+    <h2>Sign up</h2>
+    <form id="signupForm">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" placeholder="Daniel Gallego" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="hello@reallygreatsite.com" required>
+
+      <div class="row">
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="********" required>
+        </div>
+        <div>
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" placeholder="********" required>
+        </div>
+      </div>
+
+      <button type="submit">Create Account</button>
+      <p class="login-link">or <a href="login.html">Log in</a></p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+      const role = "customer"; // Set role to customer
+
+      if (password !== confirm) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      const user = { fullName, email, password, role };
+      localStorage.setItem("biteSocietyUser", JSON.stringify(user));
+      alert("Account created! You can now log in.");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

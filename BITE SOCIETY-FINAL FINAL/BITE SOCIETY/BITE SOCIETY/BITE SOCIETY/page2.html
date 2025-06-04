@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const words = ["Bite", "Society"];
+        let wordIndex = 0;
+        const changingText = document.querySelector(".changing-word");
+    
+        function changeWord() {
+            changingText.innerText = words[wordIndex];
+            wordIndex = (wordIndex + 1) % words.length;
+        }
+    
+        setInterval(changeWord, 700); 
+    
+        setTimeout(() => {
+            document.querySelector(".loading-screen").style.opacity = "0";
+            setTimeout(() => {
+                document.querySelector(".loading-screen").style.display = "none";
+            }, 500);
+        }, 3000); 
+    });
+    const creators = [
+    { name: "Ezrha Fines", image: "images/ezrha.png" },
+    { name: "John Christian Jamesula", image: "images/john.png" },
+    { name: "Rhodora Joy Ladrillo", image: "images/rhodora.png" }
+];
+
+let currentIndex = 0;
+
+function openPopup(index) {
+    currentIndex = index;
+    document.getElementById("popup-image").src = creators[currentIndex].image;
+    document.getElementById("popup-name").innerText = creators[currentIndex].name;
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function nextCreator() {
+    currentIndex = (currentIndex + 1) % creators.length;
+    openPopup(currentIndex);
+}
+
+function prevCreator() {
+    currentIndex = (currentIndex - 1 + creators.length) % creators.length;
+    openPopup(currentIndex);
+}
+
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  document.getElementById('cart-count').textContent = cart.length;
+}
+
+function updateCartModal() {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const itemsList = document.getElementById('cart-items');
+  const emptyMsg = document.getElementById('cart-empty');
+  itemsList.innerHTML = '';
+  if (cart.length === 0) {
+    emptyMsg.style.display = 'block';
+  } else {
+    emptyMsg.style.display = 'none';
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      li.style.padding = '8px 0';
+      itemsList.appendChild(li);
+    });
+  }
+}
+
+document.getElementById('cart-btn').onclick = function() {
+  updateCartModal();
+  document.getElementById('cart-modal').style.display = 'flex';
+};
+
+document.getElementById('close-cart').onclick = function() {
+  document.getElementById('cart-modal').style.display = 'none';
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateCartCount();
+});
+</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bite Society</title>
+    <link href="https://fonts.googleapis.com/css?family=Porter+Sans+Block&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+    <link href="css/page2.css" rel="stylesheet">
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-content">
+            <img src="images/logo.png" alt="Bite Society Logo" class="loading-logo">
+            <p class="loading-text">Loading <span class="changing-word">Bite Society</span>...</p>
+        </div>
+    </div>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <a href="page1.html">
+                    <a href="page1.html">
+                        <img src="images/logo.png" alt="Logo" class="logo">
+                    </a>
+                </a>
+                <span class="logo-name">BITE SOCIETY</span>
+            </div>
+            <ul>
+                <li><a href="page1.html">HOME</a></li>
+                <li><a href="page2.html">ABOUT</a></li>
+                <li><a href="products-page1.html">PRODUCTS</a></li>
+                <li><a href="page4.html">CONTACT</a></li>
+                <li id="cart-li">
+                    <button id="cart-btn" style="background:none;border:none;cursor:pointer;position:relative;">
+                        <svg id="cart-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <span id="cart-count" style="position:absolute;top:-8px;right:-8px;background:#e48a8a;color:#fff;font-size:12px;padding:2px 6px;border-radius:50%;font-weight:bold;">0</span>
+                    </button>
+                </li>
+            </ul>
+        </header>
+        <main>
+            <div class="left-column">
+                <h1>ABOUT US</h1>
+                <p>Welcome to Bite Society, where every bite tells a story! Nestled in the heart of Iloilo City, we are a small but passionate donut shop dedicated to crafting delicious, handcrafted donuts that bring joy to every customer.</p>
+                <p>With our tagline, <em>"Savor, in every Bite,"</em> we believe that each donut should be a moment of indulgence—whether it's a classic favorite or a bold new flavor. Using only the finest ingredients, we create treats that are soft, flavorful, and irresistibly good.</p>
+                <p>Join our society of donut lovers and experience the warmth, sweetness, and satisfaction in every bite.</p>
+            </div>
+            <div class="right-column">
+                <img src="images/v2021_90.png" alt="Donut Image" class="donut-image">
+            </div>
+        </main>
+        <section class="creators-section">
+            <h2 class="creators-title">MEET THE CREATORS</h2>
+            <div class="creators-container">
+                <div class="creator-card" onclick="openPopup(0)">
+                    <img src="images/ezrha.png" alt="Ezrha Fines">
+                    <p>Ezrha Fines</p>
+                </div>
+                <div class="creator-card" onclick="openPopup(1)">
+                    <img src="images/john.png" alt="John Christian Jamesula">
+                    <p>John Christian Jamesula</p>
+                </div>
+                <div class="creator-card" onclick="openPopup(2)">
+                    <img src="images/rhodora.png" alt="Rhodora Joy Ladrillo">
+                    <p>Rhodora Joy Ladrillo</p>
+                </div>
+            </div>
+        </section>
+        
+<div class="popup-overlay" id="popup">
+    <div class="popup-content">
+        <button class="arrow left" onclick="prevCreator()">&#10094;</button>
+        <img id="popup-image" src="" alt="Creator">
+        <p id="popup-name"></p>
+        <button class="arrow right" onclick="nextCreator()">&#10095;</button>
+        <button class="close-btn" onclick="closePopup()">❌</button>
+    </div>
+</div>
+
+<div id="cart-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:10000;justify-content:center;align-items:center;">
+  <div style="background:#fff;padding:32px 24px 24px 24px;border-radius:16px;min-width:320px;max-width:90vw;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+    <button id="close-cart" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;cursor:pointer;color:#e48a8a;">&times;</button>
+    <h2 style="margin-bottom:16px;color:#e48a8a;">Your Cart</h2>
+    <ul id="cart-items" style="list-style:none;padding:0;margin:0 0 16px 0;"></ul>
+    <div id="cart-empty" style="color:#888;text-align:center;">Your cart is empty.</div>
+  </div>
+</div>
+</body>
+</html>
